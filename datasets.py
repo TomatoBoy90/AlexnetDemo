@@ -15,7 +15,7 @@ class DogCat(data.Dataset):
         self.val_path = root + 'val/'
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         if mode=='train':
-            self.train_images=[os.path.join(root+'/train/',i) for i in os.listdir(self.train_path)][:1200]
+            self.train_images=[os.path.join(root+'/train/',i) for i in os.listdir(self.train_path)][:]
             self.train_images.sort()
             self.transforms = transforms.Compose([
                 transforms.Resize(size=(224, 224)),
@@ -50,6 +50,11 @@ class DogCat(data.Dataset):
             label = 1 if 'dog' in _path.split('/')[-1] else 0
             image = self.transforms(image)
             return image, label
+        elif self.mode=='test':
+            _path = self.test_images[index]
+            image = Image.open(_path)
+            image = self.transforms(image)
+            return image
 
     def __len__(self):
         if self.mode=='train':
