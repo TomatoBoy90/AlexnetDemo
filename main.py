@@ -64,10 +64,10 @@ for epoch in range(epochs):
         scalar.step(optimizer)
         scalar.update()
         optimizer.zero_grad()
-    if(epoch>0&epoch%per==0):
-        #torch.save(model,'models/'+str(epoch)+'_model.pth')
-        val_acc=val(model,val_dataloader)
-        print(val_acc)
+    if(epoch>0&epoch%10==0):
+        torch.save(model,'models/'+str(epoch)+'_model.pth')
+    val_acc=val(model,val_dataloader)
+    print(val_acc)
 
 
 
