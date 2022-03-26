@@ -4,6 +4,7 @@ from torch.cuda import  amp
 from  torch.autograd import  Variable
 from  torch.utils.data import  DataLoader
 from models.alexnet import  AlexNet
+from models.alexnetSmall import AlexNetSmallV1
 from datasets import  DogCat
 from config import *
 
@@ -31,7 +32,7 @@ opt =parser.parse_args()
 
 os.makedirs('pretrained',exist_ok=True)
 
-model=AlexNet().to(device)
+model=AlexNetSmallV1().to(device)
 train_data=DogCat()
 val_data=DogCat(mode='val')
 train_dataloader=DataLoader(train_data,batch_size=512,shuffle=True)
