@@ -1,10 +1,9 @@
 import  os
 import argparse
-import torch
 from torch.cuda import  amp
 from  torch.autograd import  Variable
 from  torch.utils.data import  DataLoader
-from  alexnet import  AlexNet
+from models.alexnet import  AlexNet
 from datasets import  DogCat
 from config import *
 
@@ -30,7 +29,7 @@ parser.add_argument('--how_many', type=int, default=50, help='how many test imag
 parser.add_argument("--export_onnx", type=str, help="export ONNX model to a given file")
 opt =parser.parse_args()
 
-os.makedirs('models',exist_ok=True)
+os.makedirs('pretrained',exist_ok=True)
 
 model=AlexNet().to(device)
 train_data=DogCat()
@@ -65,7 +64,7 @@ for epoch in range(epochs):
         scalar.update()
         optimizer.zero_grad()
     if(epoch>0&epoch%10==0):
-        torch.save(model,'models/'+str(epoch)+'_model.pth')
+        torch.save(model,'pretrained/'+str(epoch)+'_model.pth')
     val_acc=val(model,val_dataloader)
     print(val_acc)
 

@@ -1,10 +1,9 @@
 import os
-import cv2
 import torch
 import torchvision
 from torch.autograd import Variable
 from torch.utils.data import  DataLoader
-from  alexnet import AlexNet
+from models.alexnet import AlexNet
 from datasets import  DogCat
 
 os.makedirs('results/dogCat/',exist_ok=True)
